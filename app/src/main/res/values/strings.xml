@@ -12,6 +12,7 @@
     <string name="share">Share</string>
     <string name="search">Search</string>
     <string name="delete">Delete</string>
+    <string name="delete_permanently" translatable="false">Delete Permanently</string>
     <string name="restore">Restore</string>
     <string name="archive">Archive</string>
     <string name="unarchive">Unarchive</string>
@@ -22,7 +23,7 @@
     <string name="pin">Pin</string>
     <string name="unpin">Unpin</string>
     <string name="pinned">Pinned</string>
-    <string name="others">Others</string>
+    <string name="others" translatable="false">Others</string>
 
     <!-- Chooser dialog hints -->
     <string name="view_note">View note…</string>

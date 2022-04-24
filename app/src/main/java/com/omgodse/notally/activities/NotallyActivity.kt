@@ -85,6 +85,7 @@ abstract class NotallyActivity : AppCompatActivity(), OperationsParent {
             R.id.Labels -> labelNote()
             R.id.Pin -> pinNote(item)
             R.id.Delete -> deleteNote()
+            R.id.DeletePermanently -> deleteNoteForever()
             R.id.Archive -> archiveNote()
             R.id.Restore -> restoreNote()
             R.id.Unarchive -> restoreNote()

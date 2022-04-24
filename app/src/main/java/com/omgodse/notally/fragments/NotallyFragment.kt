@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -27,6 +28,7 @@ import com.omgodse.notally.databinding.FragmentNotesBinding
 import com.omgodse.notally.helpers.OperationsParent
 import com.omgodse.notally.helpers.SettingsHelper
 import com.omgodse.notally.miscellaneous.Constants
+import com.omgodse.notally.miscellaneous.NavEvent
 import com.omgodse.notally.miscellaneous.applySpans
 import com.omgodse.notally.recyclerview.ItemListener
 import com.omgodse.notally.recyclerview.adapters.BaseNoteAdapter
@@ -116,10 +118,19 @@ abstract class NotallyFragment : Fragment(), OperationsParent, ItemListener {
 
 
     private fun setupObserver() {
-        getObservable().observe(viewLifecycleOwner, { list ->
+        getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
             binding?.RecyclerView?.isVisible = list.isNotEmpty()
-        })
+        }
+
+        model.navigation.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { Event ->
+                when (Event) {
+                    is NavEvent.ToDirection -> findNavController().navigate(Event.directions)
+                    is NavEvent.Back -> findNavController().navigateUp()
+                }
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -145,12 +156,20 @@ abstract class NotallyFragment : Fragment(), OperationsParent, ItemListener {
                 arrayOf(pin, share, labels, export, moreOptions)
             }
             Folder.DELETED -> {
-                val restore = Operation(R.string.restore, R.drawable.restore) { model.restoreBaseNote(baseNote.id) }
-                val deleteForever = Operation(R.string.delete_forever, R.drawable.delete) { deleteBaseNote(baseNote) }
+                val restore = Operation(
+                    R.string.restore,
+                    R.drawable.restore
+                ) { model.restoreBaseNote(baseNote.id, Folder.DELETED) }
+                val deleteForever = Operation(
+                    R.string.delete_forever,
+                    R.drawable.delete
+                ) { deleteBaseNote(baseNote) }
                 arrayOf(restore, deleteForever)
             }
             Folder.ARCHIVED -> {
-                val unarchive = Operation(R.string.unarchive, R.drawable.unarchive) { model.restoreBaseNote(baseNote.id) }
+                val unarchive = Operation(R.string.unarchive, R.drawable.unarchive) {
+                    model.restoreBaseNote(baseNote.id, Folder.ARCHIVED)
+                }
                 arrayOf(unarchive)
             }
         }

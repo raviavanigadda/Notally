@@ -27,6 +27,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/DeletePermanently"
+        android:icon="@drawable/delete"
+        android:title="@string/delete_permanently"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/Archive"
         android:icon="@drawable/archive"
         android:title="@string/archive"

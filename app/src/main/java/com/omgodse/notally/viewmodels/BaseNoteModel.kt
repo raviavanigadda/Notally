@@ -9,9 +9,16 @@ import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.text.toHtml
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import androidx.room.withTransaction
 import com.omgodse.notally.R
+import com.omgodse.notally.fragments.ArchivedDirections
+import com.omgodse.notally.fragments.DeletedDirections
+import com.omgodse.notally.helpers.Event
+import com.omgodse.notally.miscellaneous.NavEvent
 import com.omgodse.notally.miscellaneous.applySpans
 import com.omgodse.notally.miscellaneous.getBody
 import com.omgodse.notally.miscellaneous.getLocale
@@ -42,6 +49,9 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
 
     private val labelCache = HashMap<String, Content>()
     val formatter = getDateFormatter(app.getLocale())
+
+    private val _navigation = MutableLiveData<Event<NavEvent>>()
+    val navigation: LiveData<Event<NavEvent>> get() = _navigation
 
     var currentFile: File? = null
 
@@ -79,6 +89,18 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
                 }
             }
         }
+    }
+
+    private fun navigateTo(navDirections: NavDirections) {
+        _navigation.postValue(Event(NavEvent.ToDirection(navDirections)))
+    }
+
+    private fun navigateBack() {
+        _navigation.postValue(Event(NavEvent.Back))
+    }
+
+    private fun navigateToNotes(direction: NavDirections) {
+        navigateTo(direction)
     }
 
     fun getNotesByLabel(label: String): Content {
@@ -208,7 +230,17 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
     fun unpinBaseNote(id: Long) = executeAsync { baseNoteDao.updatePinned(id, false) }
 
 
-    fun restoreBaseNote(id: Long) = executeAsync { baseNoteDao.move(id, Folder.NOTES) }
+    fun restoreBaseNote(id: Long, folder: Folder) = executeAsync {
+        baseNoteDao.move(id, Folder.NOTES)
+        when (folder) {
+            Folder.DELETED -> {
+                navigateToNotes(DeletedDirections.actionDeletedToNotes())
+            }
+            Folder.ARCHIVED -> {
+                navigateToNotes(ArchivedDirections.actionArchivedToNotes())
+            }
+        }
+    }
 
     fun moveBaseNoteToDeleted(id: Long) = executeAsync { baseNoteDao.move(id, Folder.DELETED) }
 
