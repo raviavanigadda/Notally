@@ -24,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.omgodse.notally.R
 import com.omgodse.notally.activities.MakeList
 import com.omgodse.notally.activities.TakeNote
+import com.omgodse.notally.activities.TakePhoneNumber
 import com.omgodse.notally.databinding.FragmentNotesBinding
 import com.omgodse.notally.helpers.OperationsParent
 import com.omgodse.notally.helpers.SettingsHelper
@@ -94,6 +95,7 @@ abstract class NotallyFragment : Fragment(), OperationsParent, ItemListener {
                 when (item.type) {
                     Type.NOTE -> goToActivity(TakeNote::class.java, item)
                     Type.LIST -> goToActivity(MakeList::class.java, item)
+                    Type.PHONE_NUMBER -> goToActivity(TakePhoneNumber::class.java, item)
                 }
             }
         }

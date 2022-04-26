@@ -114,4 +114,10 @@
     <style name="PrimarySecondarySwap" parent="ThemeOverlay.MaterialComponents">
         <item name="colorPrimary">?attr/colorSecondary</item>
     </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/HintColor</item>
+        <item name="hintTextColor">@color/HintColor</item>
+    </style>
+
 </resources>

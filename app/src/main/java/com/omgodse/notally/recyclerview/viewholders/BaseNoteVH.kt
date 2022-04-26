@@ -44,6 +44,7 @@ class BaseNoteVH(
         when (baseNote.type) {
             Type.NOTE -> bindNote(baseNote)
             Type.LIST -> bindList(baseNote)
+            Type.PHONE_NUMBER -> bindPhoneNumber(baseNote)
         }
 
         binding.LabelGroup.bindLabels(baseNote.labels)
@@ -72,6 +73,16 @@ class BaseNoteVH(
 
         binding.Title.text = note.title
         binding.Note.text = note.body.applySpans(note.spans)
+
+        binding.Title.isVisible = note.title.isNotEmpty()
+        binding.Note.isVisible = note.body.isNotEmpty()
+    }
+
+    private fun bindPhoneNumber(note: BaseNote) {
+        binding.LinearLayout.isVisible = false
+
+        binding.Title.text = note.title
+        binding.Note.text = note.body
 
         binding.Title.isVisible = note.title.isNotEmpty()
         binding.Note.isVisible = note.body.isNotEmpty()
@@ -113,6 +124,7 @@ class BaseNoteVH(
         return when (baseNote.type) {
             Type.NOTE -> baseNote.title.isBlank() && baseNote.body.isBlank()
             Type.LIST -> baseNote.title.isBlank() && baseNote.items.isEmpty()
+            Type.PHONE_NUMBER -> baseNote.title.isBlank() && baseNote.body.isBlank()
         }
     }
 
@@ -120,6 +132,7 @@ class BaseNoteVH(
         return when (baseNote.type) {
             Type.NOTE -> R.string.empty_note
             Type.LIST -> R.string.empty_list
+            Type.PHONE_NUMBER -> R.string.empty_phone_number
         }
     }
 
