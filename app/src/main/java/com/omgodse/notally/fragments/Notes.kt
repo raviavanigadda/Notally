@@ -10,6 +10,7 @@ import com.omgodse.notally.R
 import com.omgodse.notally.activities.MainActivity
 import com.omgodse.notally.activities.MakeList
 import com.omgodse.notally.activities.TakeNote
+import com.omgodse.notally.activities.TakePhoneNumber
 
 class Notes : NotallyFragment() {
 
@@ -38,7 +39,8 @@ class Notes : NotallyFragment() {
     private fun displayNoteTypes() {
         val makeList = Operation(R.string.make_list, R.drawable.checkbox) { goToActivity(MakeList::class.java) }
         val takeNote = Operation(R.string.take_note, R.drawable.edit) { goToActivity(TakeNote::class.java) }
-        showMenu(makeList, takeNote)
+        val takePhoneNumber = Operation(R.string.take_phone_number, R.drawable.phone) { goToActivity(TakePhoneNumber::class.java) }
+        showMenu(makeList, takeNote, takePhoneNumber)
     }
 
 

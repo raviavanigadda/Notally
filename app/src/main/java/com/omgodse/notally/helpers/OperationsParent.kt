@@ -33,7 +33,6 @@ interface OperationsParent {
 
     fun shareNote(title: String?, items: List<ListItem>?) = shareNote(title, items.getBody())
 
-
     fun labelNote(labels: List<String>, previousLabels: HashSet<String>, onUpdated: (labels: HashSet<String>) -> Unit) {
         val checkedLabels = labels.map { label -> previousLabels.contains(label) }.toBooleanArray()
 

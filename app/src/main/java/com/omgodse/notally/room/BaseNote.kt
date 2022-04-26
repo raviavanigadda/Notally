@@ -30,5 +30,9 @@ data class BaseNote(
         fun createList(id: Long, folder: Folder, title: String, pinned: Boolean, timestamp: Long, labels: HashSet<String>, items: List<ListItem>): BaseNote {
             return BaseNote(id, Type.LIST, folder, title, pinned, timestamp, labels, String(), emptyList(), items)
         }
+
+        fun createPhoneNumber(id: Long, folder: Folder, title: String, pinned: Boolean, timestamp: Long, labels: HashSet<String>, body: String): BaseNote {
+            return BaseNote(id, Type.PHONE_NUMBER, folder, title, pinned, timestamp, labels, body, emptyList(), emptyList())
+        }
     }
 }

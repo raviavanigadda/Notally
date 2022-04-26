@@ -12,6 +12,7 @@
     <string name="share">Share</string>
     <string name="search">Search</string>
     <string name="delete">Delete</string>
+    <string name="delete_permanently">Delete Permanently</string>
     <string name="restore">Restore</string>
     <string name="archive">Archive</string>
     <string name="unarchive">Unarchive</string>
@@ -35,6 +36,7 @@
     <string name="open_link">Open link</string>
     <string name="make_list">Make list</string>
     <string name="take_note">Take note</string>
+    <string name="take_phone_number">Take Phone Number</string>
     <string name="add_label">Add label</string>
     <string name="export">Export</string>
     <string name="more_options">More options</string>
@@ -53,11 +55,13 @@
     <string name="delete_note_forever">Delete note forever?</string>
     <string name="your_notes_associated">Your notes associated with this label will not be deleted</string>
 
-    <!-- Lists and Notes -->
+    <!-- Lists, Notes and Phone Numbers -->
     <string name="note">Note</string>
     <string name="item">Item</string>
     <string name="date">Date</string>
     <string name="title">Title</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
     <string name="add_item">Add Item</string>
     <string name="one_more_item">1 more item</string>
     <string name="more_items">%1$d more items</string>
@@ -74,6 +78,7 @@
     <string name="saved_to_notally">Saved to Notally</string>
     <string name="empty_note">Empty note</string>
     <string name="empty_list">Empty list</string>
+    <string name="empty_phone_number">Empty phone number</string>
     <string name="discarded_empty_note">Discarded empty note</string>
     <string name="discarded_empty_list">Discarded empty list</string>
     <string name="cant_open_link">Can\'t open link</string>

@@ -2,8 +2,7 @@
 <resources>
     <color name="LightBlue500">#03A9F4</color>
     <color name="LightBlue100">#B3E5fC</color>
-
     <color name="FABRipple">#80FFFFFF</color>
-
     <color name="Grey100">#F5F5F5</color>
+    <color name="HintColor">#696969</color>
 </resources>
